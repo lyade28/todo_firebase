@@ -1,10 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todo_app/data/firestore.dart';
+
+
+
 
 abstract class AuthenticationDatasource {
   Future<void> register(String email, String password, String PasswordConfirm);
   Future<void> login(String email, String password);
+  Future<void> signOut();
+  
 }
 
 class AuthenticationRemomote extends AuthenticationDatasource {
@@ -23,4 +27,12 @@ class AuthenticationRemomote extends AuthenticationDatasource {
       });
     }
   }
+  
+  @override
+  Future<void> signOut()  async{
+   await FirebaseAuth.instance.signOut();
+  }
+  
 }
+
+

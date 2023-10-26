@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/const/const.dart';
 import 'package:todo_app/data/firestore.dart';

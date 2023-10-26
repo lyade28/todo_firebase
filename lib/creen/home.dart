@@ -1,11 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:todo_app/const/const.dart';
 import 'package:todo_app/creen/add_note_screen.dart';
-import 'package:todo_app/data/firestore.dart';
 import 'package:todo_app/widget/stream_note.dart';
-import 'package:todo_app/widget/task_widget.dart';
+
+import '../data/auth_data.dart';
 
 class Home_screen extends StatefulWidget {
   const Home_screen({super.key});
@@ -14,7 +13,6 @@ class Home_screen extends StatefulWidget {
 }
 
 class _Home_screenState extends State<Home_screen> {
-  @override
   bool show = true;
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +47,10 @@ class _Home_screenState extends State<Home_screen> {
         },
         child: Column(
           children: [
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 30),
+              child: Logout(),
+            ),
             Stream_note(false),
             Text(
               'isDone',
@@ -63,4 +65,32 @@ class _Home_screenState extends State<Home_screen> {
       ),
     );
   }
+}
+
+Widget Logout() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 15),
+    child: Container(
+      alignment: Alignment.center,
+      width: double.infinity,
+      height: 50,
+      decoration: BoxDecoration(
+        color: custom_green,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: GestureDetector(
+        onTap: () {
+          AuthenticationRemomote().signOut();
+        },
+        child: const Text(
+          'Deconnexion',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 23,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    ),
+  );
 }

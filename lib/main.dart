@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app/auth/main_page.dart';
 import 'package:todo_app/creen/home.dart';
+import 'package:todo_app/creen/login.dart';
 import 'firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
       ),
-      home:  Home_screen()
+      home: Main_page(),
     );
   }
 }
