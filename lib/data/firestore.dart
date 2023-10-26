@@ -64,11 +64,11 @@ class Firestore_Datasource {
     }
   }
 
-  Stream<QuerySnapshot> stream() {
+  Stream<QuerySnapshot> stream(bool isDone) {
     return _firestore
         .collection('users')
         .doc(_auth.currentUser!.uid)
-        .collection('notes')
+        .collection('notes').where('isDon',isEqualTo: isDone)
         .snapshots();
   }
 
@@ -88,7 +88,7 @@ class Firestore_Datasource {
   }
 
   Future<bool> Update_note(
-      String uuid, int image, String title, subtitle) async {
+      String uuid, int image, String title,String subtitle) async {
     try {
       DateTime data =  DateTime.now();
       await _firestore
@@ -97,6 +97,7 @@ class Firestore_Datasource {
           .collection('notes')
           .doc(uuid)
           .update({
+       'time': '${data.hour}:${data.minute}',
         'subtitle': subtitle,
         'title': title,
         'image': image,
@@ -105,6 +106,19 @@ class Firestore_Datasource {
     } catch (e) {
       print(e);
       return true;
+    }
+  }
+
+
+
+  Future<bool> delet_note(String uuid ) async {
+    try {
+      await _firestore.collection('users').doc( _auth.currentUser!.uid).collection('notes').doc(uuid).delete();
+      return true;
+    } catch (e) {
+      
+      print(e);
+      return true; 
     }
   }
 }

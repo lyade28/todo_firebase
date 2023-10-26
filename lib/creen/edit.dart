@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/const/const.dart';
+import 'package:todo_app/data/firestore.dart';
 import 'package:todo_app/model/note_model.dart';
 
 class Edit_screen extends StatefulWidget {
@@ -12,7 +13,7 @@ class Edit_screen extends StatefulWidget {
 
 class _Edit_screenState extends State<Edit_screen> {
  TextEditingController? title;
- TextEditingController?  subtitle;
+ TextEditingController? subtitle;
 
 
   FocusNode _focusNode1 = FocusNode();
@@ -60,6 +61,7 @@ class _Edit_screenState extends State<Edit_screen> {
                 minimumSize: Size(170, 48)
               ),
               onPressed: () {
+                Firestore_Datasource().Update_note(widget._note.id, indexx, title!.text, subtitle!.text);
 Navigator.pop(context);
              }, child: Text('ajouter tache'),),
              ElevatedButton(
